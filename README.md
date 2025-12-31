@@ -45,5 +45,210 @@ Te sugiero añadir una sección final en tu README titulada "Synergy: CPU + RAM"
 ![IMG_20251231_140804](https://github.com/user-attachments/assets/baefd6f5-f69c-4225-855e-4873527180a2)
 
 <img width="499" height="881" alt="image" src="https://github.com/user-attachments/assets/181a7c89-3df4-44bb-88be-1a3ce3ab0b4f" />[Ryzen 9 9900x Zen 5 – Daily Tuning Guide.pdf](https://github.com/user-attachments/files/24397452/Ryzen.9.9900x.Zen.5.Daily.Tuning.Guide.pdf)
+# Ryzen 9 9900X (Zen 5) – Daily Tuning & Optimization Guide
+
+Este repositorio documenta **paso a paso** el proceso completo de afinado (tuning) de un **Ryzen 9 9900X (Zen 5)** sobre plataforma **AM5**, orientado a **uso diario estable (24/7)**, con especial atención a:
+
+* Rendimiento sostenido
+* Eficiencia energética
+* Estabilidad real (sin WHEA)
+* Preparación para altas temperaturas en verano
+
+Todo lo aquí descrito está **probado con métricas reales** (Cinebench, HWiNFO, Event Viewer, RAM testing).
+
+---
+
+## 🧩 Hardware utilizado
+
+* **CPU:** AMD Ryzen 9 9900X (Zen 5)
+* **Placa base:** MSI MAG B650 Tomahawk WiFi
+* **Refrigeración:** AIO Enermax 280 mm
+* **Memoria RAM:** DDR5 6000 MT/s CL30 (2×16 GB)
+* **Sistema operativo:** Windows 11
+
+---
+
+## ⚡ Configuración de energía (Windows)
+
+* **Plan de energía:** AMD Ryzen High Performance
+* **HAGS (Hardware Accelerated GPU Scheduling):** ❌ Desactivado
+
+  * Ruta: Configuración → Pantalla → Gráficos
+  * En AMD suele reducir latencia y microstutter
+
+---
+
+## 🔧 BIOS – Ajustes de CPU (Perfil DAILY)
+
+### Precision Boost Overdrive (PBO)
+
+| Parámetro      | Valor |
+| -------------- | ----- |
+| PPT            | 215 W |
+| TDC            | 165 A |
+| EDC            | 180 A |
+| Boost Override | 0 MHz |
+
+✔️ No hay limitación por potencia
+✔️ Frecuencias sostenidas estables
+
+---
+
+### Curve Optimizer (por core)
+
+* **Cores 0–11:** `-25`
+* **Core 5 (peor core térmico):** `-10`
+
+Resultados:
+
+* Reducción clara de voltaje
+* Menor temperatura pico
+* Mejor rendimiento sostenido
+* Sin errores WHEA
+
+---
+
+### Curve Shaper (Zen 5)
+
+Configuración progresiva para frecuencias medias y altas:
+
+| Rango               | Magnitude |
+| ------------------- | --------- |
+| Medium              | 5         |
+| High                | 7         |
+| Max                 | 10        |
+| Frequency Threshold | 57        |
+
+✔️ Mejora estabilidad en picos single-core
+✔️ No afecta al rendimiento multinúcleo
+✔️ Voltaje controlado
+
+---
+
+### Temperaturas
+
+* **Temperatura máxima observada:** ~86 °C
+* **Core más caliente (Core 5):** ~82–86 °C
+
+🔒 Recomendación para verano:
+
+* **Thermal Limit:** `85 °C`
+
+  * Impacto de rendimiento mínimo (~1–2 %)
+  * Gran mejora en estabilidad térmica
+
+---
+
+## 🧠 Memoria RAM – Configuración DAILY
+
+### Frecuencia y sincronización
+
+* **DDR5:** 6000 MT/s
+* **UCLK = MCLK:** 3000 (1:1)
+* **FCLK:** 2000 (daily)
+
+👉 Sweet spot AM5 / Zen 5
+
+---
+
+### Timings principales
+
+| Timing   | Valor   |
+| -------- | ------- |
+| tCL      | 30      |
+| tRCD     | 36      |
+| tRP      | 36      |
+| tRAS     | 48      |
+| tRC      | 84      |
+| **tRFC** | **480** |
+
+**Motivo del tRFC 480:**
+
+* Mucha más tolerancia al calor
+* Idle más estable
+* Diferencia de latencia mínima (~1 ns)
+* Ideal para uso 24/7
+
+---
+
+### Voltajes RAM
+
+| Parámetro | Valor   |
+| --------- | ------- |
+| VSOC      | 1.20 V  |
+| VDD       | 1.35 V  |
+| VDDQ      | 1.35 V  |
+| VDDG CCD  | ~0.95 V |
+| VDDG IOD  | ~0.95 V |
+| CLDO VDDP | ~0.95 V |
+
+✔️ Voltajes conservadores
+✔️ Seguros para verano
+
+---
+
+## 🧪 Validación de estabilidad
+
+### CPU
+
+* Cinebench R23 (single y multi)
+* Uso prolongado
+* Juegos
+* Idle largo
+
+### RAM
+
+* Uso diario prolongado
+* Ajustes conservadores para calor
+
+### WHEA
+
+Verificado con PowerShell:
+
+```powershell
+Get-WinEvent -LogName System | Where-Object {$_.ProviderName -eq "WHEA-Logger"}
+```
+
+✅ **Resultado:** CERO eventos WHEA
+
+---
+
+## 📊 Resultados finales
+
+* **Cinebench R23:** ~34 000+ puntos
+* Mejor rendimiento que stock
+* Menor voltaje
+* Menor temperatura
+* Total estabilidad
+
+---
+
+## 💾 Perfiles BIOS recomendados
+
+* **DAILY** – Uso diario estable (este perfil)
+* **SUMMER** – Igual que DAILY + Thermal Limit 85 °C
+* **BENCH / GAMING** (opcional)
+
+  * FCLK 2100
+  * tRFC 400
+  * Uso puntual
+
+---
+
+## 🏁 Conclusión
+
+Este tuning no busca récords sintéticos, sino:
+
+✔️ Rendimiento real
+✔️ Eficiencia
+✔️ Estabilidad 24/7
+✔️ Preparación para calor
+
+El resultado es un **Ryzen 9 9900X Zen 5 afinado de forma madura**, superior a stock y a la mayoría de configuraciones automáticas.
+
+---
+
+📌 **Nota:** Cada CPU/IMC es diferente. Usa estos valores como referencia y valida siempre en tu propio sistema.
+
 
 
