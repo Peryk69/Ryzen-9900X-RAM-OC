@@ -41,3 +41,9 @@ Te sugiero añadir una sección final en tu README titulada "Synergy: CPU + RAM"
 
 ¿Te gustaría que te redacte también los pasos específicos para encontrar estas opciones dentro del menú de Overclocking de tu placa MSI?
 <img width="662" height="625" alt="image" src="https://github.com/user-attachments/assets/c0b00cbb-969f-47ef-bf07-7e905ed6247e" />
+<img width="470" height="695" alt="Captura de pantalla 2025-12-31 201258" src="https://github.com/user-attachments/assets/b37005c4-6746-4b6b-a8b1-56724aa6ae5e" />![IMG_20251231_140814](https://github.com/user-attachments/assets/ef89e670-26f7-424a-b3e8-7b21c9b06654)
+![IMG_20251231_140804](https://github.com/user-attachments/assets/baefd6f5-f69c-4225-855e-4873527180a2)
+
+<img width="499" height="881" alt="image" src="https://github.com/user-attachments/assets/181a7c89-3df4-44bb-88be-1a3ce3ab0b4f" />[Ryzen 9 9900x Zen 5 – Daily Tuning Guide.pdf](https://github.com/user-attachments/files/24397452/Ryzen.9.9900x.Zen.5.Daily.Tuning.Guide.pdf)
+
+
